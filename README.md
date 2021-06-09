@@ -1,6 +1,6 @@
 # study guide based on React Course NLW
 
-## This is a compile of everything I learned with is guided project and made for future consultation
+#### This is a compile of everything I learned with is guided project and made for future consultation
 
 ## What about the project
 
@@ -69,6 +69,9 @@ import styles from './Header.module.css'
 
 A simple header of our app, with the date-fns showing the current date brazilian format
 
+`Player`
+
+Basic player responsable to execute the podcasts
 
 ### Libs
 
