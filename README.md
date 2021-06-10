@@ -93,7 +93,7 @@ in SSG method you can specificate how offen your app need to be reloaded or upda
 and in this way you can save ressources
 
 ```typescript
-export async function getStaticProps(){ //inside the component
+export const GetStaticProps: GetStaticProps = async () => { //inside the component
 	const response = await fetch('adress')
 	const data = await response.json()
 	
@@ -101,7 +101,7 @@ export async function getStaticProps(){ //inside the component
 		props: { //keep the name props
 			nameOfDaata: data,
 		},
-		revalidate: 60 * 60 * 8                  //frequency in seconds of data update. in the exemplo 8 hours
+		revalidate: 60 * 60 * 8                  //frequency in seconds of data update. in the exemple 8 hours
 	}
 }
 ```
@@ -139,9 +139,17 @@ Basic player responsable to execute the podcasts
 
 ### Libs
 
+As a measure of performance we convert the data types to string and other things before,
+we send to the app, as a way to avoid a large number of process in the user browser and send this 
+work to que server
+
+### Libs
+
 `date fns`
 
 Lib to work with dates
+
+used: format(format the data as desired), parsedISO (convert a date to a string)
 
 `Json Server`
 
@@ -150,6 +158,37 @@ develop a solution in offline enviroment
 
 we created a script to run toguether with the app
 running in whatchmode '-w', with 720 ms delay '-d' in the port 3333 '-p 3333'
+
 ```json
 "server": "json-server server.json -w -d 720 -p 3333"
 ```
+The JasonServer has a lots of params about how you fetch your api
+ `
+ ```json
+ "adress?_limit=12"     							//limit the number of requisitions
+ "adress?_limit=12&_sort=published_at"	    		//sort the data by something
+ "adress?_limit=12&_sort=published_at&_order=desc"	//what order asc or desc
+ ```
+
+ `Axios`
+
+ a lib where you can fetch data, making request in a clever way
+ exemple setting a baseURL on a separate folder 
+
+  ```javascript
+export const api = axios.create({
+    baseURL: 'http://localhost:3333/'
+})
+```
+
+You can execute the fetch in a clean way using the class created above 
+
+```javascript
+  const response = await api.get('episodes', {
+    params: {
+      _limit: 12,
+      _sort: 'published_at',
+      _order: 'desc',
+    }
+  })
+  ```
