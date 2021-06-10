@@ -47,6 +47,21 @@ when the user change to a different route as if we had inserted on index page
 
 Used the structure as it follows on next docs to load the fonts
 
+#### New css ressources never used by me before
+
+calc(100vh - 6.5rem); - calculus inside css
+linear-gradient - name speaks by itself
+overflow-y: scroll - better experience
+text-overflow: ellipsis; put '...' on excess text
+
+### why Next
+
+The possibility to perform the application better with the use of SSG suport (Bellow) and other features.
+
+`IMAGE`
+
+the possibility of reduce and control the image quality before arrives in the browser
+
 ### Fetching the API
 
 We can consume the api data in 3 ways.

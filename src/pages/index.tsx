@@ -1,8 +1,11 @@
 import { GetStaticProps } from 'next'
+import Image from 'next/image'
 import { api } from '../Services/api'
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
+
 import { convertDurationToTimeString } from '../utils/convertDurationToTimestring'
+import styles from './Home.module.css'
 
 //typing my objects
 type Episode = {
@@ -18,16 +21,44 @@ type Episode = {
 }
 
 type HomeProps = {
-  episodes: Episode[]
+  lastestEpisodes: Episode[]
+  allEpisodes: Episode[]
 }
 
 
-export default function Home(props: HomeProps) {
+export default function Home({ lastestEpisodes, allEpisodes }: HomeProps) {
   return (
-    <>
-   <div>Index</div>
-   <p>{JSON.stringify(props.episodes)}</p>
-   </>
+    <div className={styles.homepage} >
+   <section className={styles.lastedEpisodes} >
+     <h2>Últimos lançamentos</h2>
+
+      <ul>
+        {lastestEpisodes.map( episode => {
+          return (
+            <li key={episode.id}>
+              <Image width={192} height={192} 
+              src={episode.thumbnail} alt={episode.title} 
+              objectFit='cover' />
+
+              <div className={styles.episodeDetails} >
+                <a href=''>{episode.title}</a>
+                <p>{episode.members}</p>
+                <span>{episode.publishedAt}</span>
+                <span>{episode.durationAsString}</span>
+              </div>
+
+              <button type='button' className={styles.buttonPlay} >
+                <img src='/play-green.svg' alt='Tocar o episódio' />
+              </button>
+
+            </li>
+          )
+        })}
+      </ul>
+
+   </section>
+   <section className={styles.allEpisodes} ></section>
+   </div>
   )
 }
 
@@ -53,14 +84,19 @@ export const getStaticProps: GetStaticProps = async () => {
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
-      description: episode.file.description,
+      description: episode.description,
       url: episode.file.url
     }
   })
 
+  //separate the last 2 episodes for show in the index
+  const lastestEpisodes = episodes.slice(0, 2)
+  const allEpisodes = episodes.slice(2, episodes.length)
+
   return {
     props: {
-      episodes: data
+      lastestEpisodes,
+      allEpisodes
     },
     revalidate: 60 * 60 * 24
   }
