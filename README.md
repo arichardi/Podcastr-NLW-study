@@ -62,6 +62,40 @@ The possibility to perform the application better with the use of SSG suport (Be
 
 the possibility of reduce and control the image quality before arrives in the browser
 
+`Routing`
+
+All files in the pages folder whose name does not start with '_' are automatically
+defined as a route
+
+*Using a slug or an user friendly interface for query params ?*
+
+create a hierarquie folder inside pages, and the name of file as *[slug].tsx*
+to receive the param, you import useRouter from next/router, and insert an useRouter()
+
+```typescript
+
+	import { useRouter } from 'next/router'
+
+	const router = useRouter()
+	<h1> {router.query.slug} </h1>
+```
+
+*How use the links with is system*
+
+You pass a anchor tag, with the adress, nothing new.
+But now you need to wrap this anchot tag, with a Link tag from next, and pass the adress
+as a paramether of Link this time
+
+```Javascript 
+
+	import Link from 'next/link'
+
+	<Link href={`/episodes/${episode.id}`} >
+		<a> {episode.title} </a>
+	</Link>
+	
+```
+
 ### Fetching the API
 
 We can consume the api data in 3 ways.
@@ -125,6 +159,8 @@ and send the return/result by props
 the data will be updated accordingly with the revalidate time
 
 In this method you will nedd build your app to work properly
+
+`Get Static Path`
 
 ### Components
 
