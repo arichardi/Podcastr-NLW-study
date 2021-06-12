@@ -86,6 +86,8 @@ You pass a anchor tag, with the adress, nothing new.
 But now you need to wrap this anchot tag, with a Link tag from next, and pass the adress
 as a paramether of Link this time
 
+*You can use Link arround and button too*
+
 ```Javascript 
 
 	import Link from 'next/link'
@@ -161,6 +163,9 @@ the data will be updated accordingly with the revalidate time
 In this method you will nedd build your app to work properly
 
 `Get Static Path`
+
+mandatory the use with dynamic routes and when we use getStaticProps
+
 
 ### Components
 
