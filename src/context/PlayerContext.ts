@@ -4,13 +4,14 @@ type Episode = {
     title: string,
     members: string,
     thumbnail: string,
-    duration: string,
+    duration: number,
     utl: string
 }
 
 type PlayerContextData = {
     episodeList: Episode[],
-    currentEpisodeIndex: Number 
+    currentEpisodeIndex: number,
+    play: (episode: Episode) => void
 }
 
-export const playerContext = createContext('')
+export const playerContext = createContext({} as PlayerContextData) //force attribution of types
