@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { playerContext } from '../context/PlayerContext'
+import Image from 'next/image'
 
 import style from './Player.module.css'
 
@@ -17,9 +18,24 @@ function Player(){
             <strong>Tocando agora {episode?.title} </strong>
         </header>
 
-        <div className={style.emptyPlayer}>
-            <strong>Selecione um podcast para ouvir</strong>
-        </div>
+        { episode ? 
+        (
+            <div className={style.currentEpisode}>
+                <Image 
+                    width={592} height={592}
+                    src={episode.thumbnail}
+                    objectFit='cover'
+                />
+                <strong>{episode.title}</strong>
+                <span>{episode.members}</span>
+            </div>
+        ) : 
+        
+         (
+            <div className={style.emptyPlayer}>
+                <strong>Selecione um podcast para ouvir</strong>
+            </div>
+        )}
 
         <footer className={style.empty}>
             <div className={style.progress}>

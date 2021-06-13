@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   const [episodeList, setEpisodeList] = useState([])
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0)
 
-  function play(episode): void{
+  function play(episode){
     setEpisodeList([episode])
     setCurrentEpisodeIndex(0)
   }

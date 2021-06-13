@@ -5,7 +5,7 @@ type Episode = {
     members: string,
     thumbnail: string,
     duration: number,
-    utl: string
+    url: string
 }
 
 type PlayerContextData = {

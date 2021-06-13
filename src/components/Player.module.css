@@ -86,3 +86,26 @@
     border-radius: 1rem;
     background: var(--purple-400) !important;
 }
+
+.currentEpisode {
+    text-align: center;
+}
+
+.currentEpisode strong {
+    display: block;
+    margin-top: 2rem;
+    font: 600 1.25rem Lexend, sans-serif;
+    line-height: 1.75rem;
+
+}
+
+.currentEpisode img {
+    border-radius: 1.5rem;
+}
+
+.currentEpisode span {
+    display: block;
+    margin-top: 1rem;
+    opacity: 0.6;
+    line-height: 1.5rem;
+}
