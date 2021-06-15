@@ -2,6 +2,9 @@ import { useContext } from 'react'
 import { playerContext } from '../context/PlayerContext'
 import Image from 'next/image'
 
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
+
 import style from './Player.module.css'
 
 function Player(){
@@ -37,10 +40,19 @@ function Player(){
             </div>
         )}
 
-        <footer className={style.empty}>
+        <footer className={!episode ? style.empty : ''}>
             <div className={style.progress}>
                 <span>00:00</span>
-                <div className={style.emptySlider}/>
+                { episode ? (
+                    <Slider 
+                        trackStyle={{ background: '#04d361'}}
+                        railStyle={{background: '#9f75ff'}}
+                        handleStyle={{ borderColor: '#04d361', borderWidth: 4}}
+                    />
+                ) : (
+                    <div className={style.emptySlider} />
+                )
+                }
                 <span>00:00</span>
             </div>
             <div className={style.buttons} >
