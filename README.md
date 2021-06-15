@@ -288,8 +288,6 @@ to receive the param, you import useRouter from next/router, and insert an useRo
 	<h1> {router.query.slug} </h1>
 ```
 
-
-
 *How use the links with is system*
 
 You pass an anchor tag, with the address, nothing new.
@@ -477,5 +475,7 @@ _order: 'desc',
 }
 })
 ```
+`RC-Slider`
 
+simple slider for the player
 

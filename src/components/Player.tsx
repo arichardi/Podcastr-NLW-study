@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { playerContext } from '../context/PlayerContext'
 import Image from 'next/image'
 
@@ -9,7 +9,26 @@ import style from './Player.module.css'
 
 function Player(){
 
-    const { episodeList, currentEpisodeIndex} = useContext(playerContext)
+    const audioRef = useRef<HTMLAudioElement>(null)
+
+    const { episodeList,
+            currentEpisodeIndex,
+            isPlaying,
+            togglePlay,
+            setPlayingState
+        } = useContext(playerContext)
+
+    useEffect( () => {
+        if (!audioRef.current){
+            return;
+        }
+        if(isPlaying){
+            audioRef.current.play()
+        }else {
+            audioRef.current.pause()
+        }
+
+    }, [isPlaying])
 
     const episode = episodeList[currentEpisodeIndex]
 
@@ -55,20 +74,40 @@ function Player(){
                 }
                 <span>00:00</span>
             </div>
+
+                { episode && (
+                    <audio 
+                        src={episode.url}
+                        ref={audioRef}
+                        autoPlay
+                        onPlay={ () => setPlayingState(true)}
+                        onPause={() => setPlayingState(false)}
+                    />
+                )}
+
             <div className={style.buttons} >
-                <button type='button'>
+                <button type='button' disabled={ !episode}>
                     <img src='/shuffle.svg' alt='shuffle' />
                 </button>
-                <button type='button'>
+                <button type='button' disabled={ !episode}>
                     <img src='/play-previous.svg' alt='play-previous' />
                 </button>
-                <button type='button' className={style.playButton}>
-                    <img src='/play.svg' alt='play' />
+                <button type='button' 
+                className={style.playButton} 
+                disabled={ !episode}
+                onClick={togglePlay}
+                
+                >
+                    { isPlaying ? (
+                        <img src='/pause.svg' alt='play' />
+                    ) : (
+                        <img src='/play.svg' alt='play' />
+                    )}
                 </button>
-                <button type='button'>
+                <button type='button' disabled={ !episode}>
                     <img src='/play-next.svg' alt='play-next' />
                 </button>
-                <button type='button'>
+                <button type='button' disabled={ !episode}>
                     <img src='/repeat.svg' alt='repeat' />
                 </button>
             </div>

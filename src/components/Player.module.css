@@ -80,6 +80,10 @@
     font-size: 0;
 }
 
+.buttons button:disabled{
+    cursor: default;
+}
+
  .playButton {
     width: 4rem;
     height: 4rem;
