@@ -9,12 +9,13 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimestring'
 
 import styles from './episode.module.css'
+import { usePlayer } from '../../context/PlayerContext'
 
 type Episode = {
     id: string
     title: string
     thumbnail: string
-    members: number
+    members: string
     publishedAt: string
     duration: number
     durationAsString: string
@@ -25,6 +26,8 @@ type Episode = {
 type EpisodeProps = { episode: Episode}
 
 export default function episode({episode}: EpisodeProps){
+
+    const { play } = usePlayer()
 
     const router = useRouter()
 
@@ -37,7 +40,7 @@ export default function episode({episode}: EpisodeProps){
                 </button>
                 </Link>
                 <Image width={700} height={160} src={episode.thumbnail} objectFit='cover' />
-                <button type='button'>
+                <button type='button' onClick={ () => play(episode)}>
                     <img src='/play.svg' alt='Tocar episodio'/>
                 </button>
             </div>

@@ -113,3 +113,11 @@
     opacity: 0.6;
     line-height: 1.5rem;
 }
+
+.isActive {
+    filter: brightness(0.6) sepia(1) saturate(3) hue-rotate(100deg);
+}
+
+.isActive:hover {
+    filter: brightness(0.8) sepia(1) saturate(3) hue-rotate(100deg);
+}
